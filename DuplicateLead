@@ -1,0 +1,105 @@
+package Week2.day2;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+//import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.support.ui.Select;
+import io.github.bonigarcia.wdm.WebDriverManager;
+
+
+public class DuplicateLead {
+
+	public static void main(String[] args) {
+
+		// 1. Launch URL "http://leaftaps.com/opentaps/control/login"
+		WebDriverManager.chromedriver().setup();
+		ChromeDriver driver = new ChromeDriver();
+		driver.get(" http://leaftaps.com/opentaps/control/main");
+		driver.manage().window().maximize();
+
+		// 2. Enter UserName and Password Using Id Locator
+		WebElement userName = driver.findElement(By.id("username"));
+		userName.sendKeys("Demosalesmanager");
+
+		WebElement password = driver.findElement(By.id("password"));
+		password.sendKeys("crmsfa");
+
+		// 3. Click on Login Button using Class Locator
+		WebElement login = driver.findElement(By.className("decorativeSubmit"));
+		login.click();
+
+		// 4. Click on CRM/SFA Link
+		WebElement crmLink = driver.findElement(By.linkText("CRM/SFA"));
+		crmLink.click();
+
+		// 5. Click on Leads Button
+		WebElement leadsLink = driver.findElement(By.linkText("Leads"));
+		leadsLink.click();
+
+		// 6. Click on Create Lead
+		WebElement createLead = driver.findElement(By.linkText("Create Lead"));
+		createLead.click();
+
+		// 7. Enter CompanyName Field Using id Locator
+		WebElement createleadCompany = driver.findElement(By.id("createLeadForm_companyName"));
+		createleadCompany.sendKeys("test");
+
+		// 8. Enter FirstName Field Using id Locator
+		WebElement createleadFirstName = driver.findElement(By.id("createLeadForm_firstName"));
+		createleadFirstName.sendKeys("Bhumesh");
+
+		// 9. Enter LastName Field Using id Locator
+		WebElement createleadLastName = driver.findElement(By.id("createLeadForm_lastName"));
+		createleadLastName.sendKeys("S");
+
+		// 10. Enter FirstName(Local) Field Using id Locator
+
+		WebElement localFirstName = driver.findElement(By.id("createLeadForm_firstNameLocal"));
+		localFirstName.sendKeys("test");
+		// 11. Enter Department Field Using any Locator of Your Choice
+		WebElement department = driver.findElement(By.xpath("//input[@id='createLeadForm_departmentName']"));
+		department.sendKeys("Information Technology");
+		// 12. Enter Description Field Using any Locator of your choice
+		WebElement description = driver.findElement(By.id("createLeadForm_description"));
+		description.sendKeys("Enquiry");
+		// 13. Enter your email in the E-mail address Field using the locator of
+		// your choice
+		WebElement email = driver.findElement(By.id("createLeadForm_primaryEmail"));
+		email.sendKeys("test@gmail.com");
+		// 14. Select State/Province as NewYork Using Visible Text
+		WebElement state = driver.findElement(By.id("createLeadForm_generalStateProvinceGeoId"));
+		Select opState = new Select(state);
+		opState.selectByVisibleText("New York");
+		// 15. Click on Create Button
+		WebElement createLeadButton = driver.findElement(By.name("submitButton"));
+		createLeadButton.click();
+		// 16. Get the Title of Resulting Page(refer the video) using
+		// driver.getTitle()
+
+		System.out.println("The title of the page is " + driver.getTitle());
+
+		// 17. Click on Duplicate button
+		WebElement duplicateButton = driver.findElement(By.linkText("Duplicate Lead"));
+		duplicateButton.click();
+		// 18. Clear the CompanyName Field using .clear() And Enter new
+		// CompanyName
+		WebElement company = driver.findElement(By.id("createLeadForm_companyName"));
+		company.clear();
+		company.sendKeys("Test_duplicate");
+
+		// 19.Clear the FirstName Field using .clear() And Enter new FirstName
+		WebElement firstName = driver.findElement(By.id("createLeadForm_firstName"));
+		firstName.clear();
+		firstName.sendKeys("Priya");
+
+		// 20.Click on Create Lead Button
+		WebElement createDuplicateLead = driver.findElement(By.xpath("//input[@name='submitButton']"));
+		createDuplicateLead.click();
+
+		// 21. Get the Title of Resulting Page(refer the video) using driver.getTitle()
+		System.out.println("The title of the page is " + driver.getTitle());
+
+	}
+
+}
