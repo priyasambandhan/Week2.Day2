@@ -1,0 +1,56 @@
+package Week2.day2;
+
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.By;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+import io.github.bonigarcia.wdm.WebDriverManager;
+
+public class EditFields {
+	public static void main(String[] args) {
+		
+
+	WebDriverManager.chromedriver().setup();		
+	ChromeDriver driver=new ChromeDriver();		
+	driver.get("http://www.leafground.com/pages/Edit.html");
+	driver.manage().window().maximize();
+	
+
+	//Enter email address
+	
+	WebElement edit1= driver.findElement(By.id("email"));
+	edit1.sendKeys("test@abc.com");
+	
+	//Append a text and press keyboard tab
+	WebElement edit2=driver.findElement(By.xpath("//input[@value='Append ']"));
+		String s1=edit2.getText();
+	//edit2.clear();
+	 s1=s1+" Edit";
+	edit2.sendKeys(s1);
+	edit2.sendKeys(Keys.TAB);
+	
+	//Get default text entered
+	WebElement edit3=driver.findElement(By.name("username"));
+	System.out.println(edit3.getText());
+	
+	//Clear the text
+	
+	WebElement edit4=driver.findElement(By.xpath("//input[@value='Clear me!!']"));
+	edit4.clear();
+	
+	//Confirm that edit field is disabled
+
+	WebElement edit5=driver.findElement(By.xpath("//input[@disabled='true']"));
+	if(edit5.isEnabled())
+	{
+		System.out.println("The field is enabled");
+	}
+	else
+		System.out.println("The field is disabled");
+	
+}
+}
